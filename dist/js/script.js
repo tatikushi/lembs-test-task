@@ -1,0 +1,1 @@
+$("#btnModal").click(function(l){l.preventDefault(),$(".modal").modal("show")});
