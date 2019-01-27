@@ -9,10 +9,15 @@
   "author": "Tetiana Kushniruk <tatikushniruk@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "fa-minify": "^1.2.0",
     "gulp": "^4.0.0",
     "gulp-cssmin": "^0.2.0",
+    "gulp-fa-minify": "^1.1.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-imagemin": "^5.0.3",
     "gulp-uglify": "^3.0.1"
+  },
+  "dependencies": {
+    "del": "^3.0.0"
   }
 }

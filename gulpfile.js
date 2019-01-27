@@ -1,9 +1,11 @@
 const gulp = require('gulp');
 const htmlmin = require('gulp-htmlmin');
-var uglify = require('gulp-uglify');
-var pump = require('pump');
-var cssmin = require('gulp-cssmin');
+const uglify = require('gulp-uglify');
+const pump = require('pump');
+const cssmin = require('gulp-cssmin');
 const imagemin = require('gulp-imagemin');
+const faMinify = require('gulp-fa-minify');
+const del = require('del');
 
 gulp.task('html', () => {
     return gulp.src('*.html')
@@ -34,4 +36,26 @@ gulp.task('img', () => {
     .pipe(gulp.dest('dist/img'));
 });
 
-gulp.task('default', gulp.series('css', 'js', 'html', 'img'));
+gulp.task('fa', () => {
+    const usedIcons = {
+        fal: [],
+        far: [],
+        fas: ['play-circle', 'sliders-h', 'code', 'bold', 'quote-left'],
+        fab: ['wpforms', 'css3', 'facebook-square', 'twitter-square', 'instagram']
+    };
+
+    return gulp.src('lib/fa-all.js')
+        .pipe(faMinify(usedIcons))
+        .pipe(gulp.dest('dist/lib'));
+});
+
+gulp.task('fonts', () => {
+    return gulp.src('fonts/**/*')
+        .pipe(gulp.dest('dist/fonts'));
+});
+
+gulp.task('clean', function(){
+    return del(['dist/**']);
+});
+
+gulp.task('default', gulp.series('clean', 'css', 'js', 'html', 'img', 'fa', 'fonts'));
